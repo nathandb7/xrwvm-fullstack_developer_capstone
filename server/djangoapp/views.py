@@ -37,9 +37,9 @@ def login_user(request):
     
     return JsonResponse(data)
 
-# Crear una vista `logout_user` para manejar solicitudes de cierre de sesión
-def logout_user(request):
-    logout(request)  # Esto cierra la sesión del usuario
+def logout_request(request):
+    # Cerrar la sesión del usuario
+    logout(request)
+    # Devolver un JSON con el nombre de usuario vacío
     data = {"userName": ""}
     return JsonResponse(data)
-

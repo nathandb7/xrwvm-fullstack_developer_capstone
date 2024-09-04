@@ -59,45 +59,49 @@
             background-color: darkturquoise;
         }
     </style>
-<script>
-    const logout = async (e) => {
-        e.preventDefault(); // Previene el comportamiento por defecto del enlace
-        let logout_url = window.location.origin + "/djangoapp/logout/";
-        try {
-            const res = await fetch(logout_url, {
-                method: "GET",
-            });
-            const json = await res.json();
-            if (json.userName === "") {
-                let username = sessionStorage.getItem('username');
-                sessionStorage.removeItem('username');
-                window.location.href = window.location.origin;
-                alert("Logging out " + username + "...");
-            } else {
-                alert("The user could not be logged out.");
-            }
-        } catch (error) {
-            alert("An error occurred during logout.");
-        }
-    };
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    checkSession();
+});
 
-    const checkSession = () => {
-        let curr_user = sessionStorage.getItem("username");
-        if (curr_user && curr_user !== "") {
-            document.getElementById("loginlogout").innerHTML = 
-                '<span class="homepage_links">' + curr_user + '</span>' +
-                '<a class="homepage_links" href="/" onclick="logout()">Logout</a>';
-        } else {
-            document.getElementById("loginlogout").innerHTML = 
-                '<a class="homepage_links" href="/login">Login</a>' +
-                '<a class="homepage_links" href="/register">Register</a>';
-        }
-    };
+let checkSession = () => {
+    let curr_user = sessionStorage.getItem("username");
+    if (curr_user && curr_user !== "") {
+        document.getElementById("loginlogout").innerHTML = 
+            '<span class="homepage_links">' + curr_user + '</span>' +
+            '<a class="homepage_links" href="#" onclick="logout(event)">Logout</a>';
+    } else {
+        document.getElementById("loginlogout").innerHTML = 
+            '<a class="homepage_links" href="/login">Login</a>' +
+            '<a class="homepage_links" href="/register">Register</a>';
+    }
+};
+
+const logout = async (e) => {
+    e.preventDefault();
+    let logout_url = window.location.origin + "/djangoapp/logout";
+    const res = await fetch(logout_url, {
+        method: "GET",
+    });
+
+    const json = await res.json();
+    if (json) {
+        let username = sessionStorage.getItem('username');
+        sessionStorage.removeItem('username');
+        localStorage.removeItem('username');
+        alert("Logging out " + username + "...");
+        window.location.href = window.location.origin;
+        window.location.reload();
+    } else {
+        alert("The user could not be logged out.");
+    }
+};
+
 </script>
 
 
 </head>
-<body onload="checkSession()">
+<body onload="">
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
   <div class="container-fluid">
     <h2 style="padding-right: 5%;">Dealerships</h2>
