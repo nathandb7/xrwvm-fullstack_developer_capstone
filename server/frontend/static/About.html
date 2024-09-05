@@ -1,133 +1,72 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <!-- Link the style sheet here -->
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="/static/bootstrap.min.css">
-    <style>
-        .card {
-            margin: 20px;
-        }
-        .card-body {
-            text-align: center;
-        }
-        .banner {
-            text-align: center;
-            padding: 20px;
-            background-color: lightgray;
-            margin-bottom: 30px;
-        }
-        .navbar-custom {
-            background-color: darkturquoise;
-        }
-    </style>
-  <script>
-document.addEventListener("DOMContentLoaded", function() {
-    checkSession();
-});
-
-let checkSession = () => {
-    let curr_user = sessionStorage.getItem("username");
-    if (curr_user && curr_user !== "") {
-        document.getElementById("loginlogout").innerHTML = 
-            '<span class="homepage_links">' + curr_user + '</span>' +
-            '<a class="homepage_links" href="#" onclick="logout(event)">Logout</a>';
-    } else {
-        document.getElementById("loginlogout").innerHTML = 
-            '<a class="homepage_links" href="/login">Login</a>' +
-            '<a class="homepage_links" href="/register">Register</a>';
-    }
-};
-
-const logout = async (e) => {
-    e.preventDefault();
-    let logout_url = window.location.origin + "/djangoapp/logout";
-    const res = await fetch(logout_url, {
-        method: "GET",
-    });
-
-    const json = await res.json();
-    if (json) {
-        let username = sessionStorage.getItem('username');
-        sessionStorage.removeItem('username');
-        localStorage.removeItem('username');
-        alert("Logging out " + username + "...");
-        window.location.href = window.location.origin;
-        window.location.reload();
-    } else {
-        alert("The user could not be logged out.");
-    }
-};
-
-</script>
-
+  <!-- Link the style sheet here -->
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
 </head>
-<body onload="checkSession()">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-  <div class="container-fluid">
-    <h2 style="padding-right: 5%;">Dealerships</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" style="font-size: larger;" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <div class="loginlink" id="loginlogout">
-        </div>
-        </span>
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-
-    <div class="card mx-auto" style="width: 80%; margin-top: 5%;">
-        <div class="banner">
-            <h1>About Us</h1>
-            <p>Welcome to Best Cars Dealership, where quality meets affordability. We specialize in both domestic and imported vehicles, offering our customers the best deals and services in North America. Our team is dedicated to helping you find the perfect car that meets your needs and budget.</p>
+  </nav>
+  
+    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
+      <div class="banner" name="about-header">
+      <!-- Insert header information here -->
+      <h1>About Us</h1>
+      Welcome to Bromso Motors dealership, home to the best cars in North America. We deal in sale of domestic and imported cars at reasonable prices.
+      </div>
+      <div style="display: flex;flex-direction: row; margin:auto">
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="https://static.wikia.nocookie.net/goodgirls/images/6/60/Beth_Bromso.png/revision/latest?cb=20190506155426" alt="Card image">
+        <div class="card-body">
+          <p class="title">Manager</p>
+          <p>Beth Bromso</p>
+          <p class="card-text">Skilled car saleswoman, known for her charm and ability to close deals. She juggles her career with the challenges of motherhood and marital struggles.</p>
+          <p>bethBromso@carscars.com</p>
         </div>
-        <div class="d-flex justify-content-around">
-            <div class="card" style="width: 30%;">
-                <img class="card-img-top" src="/static/john_doe.jpg" alt="John Doe">
-                <div class="card-body">
-                    <h5 class="card-title">John Doe</h5>
-                    <p class="card-text">CEO & Founder</p>
-                    <p class="card-text">John has over 20 years of experience in the automotive industry and is committed to providing the best customer service experience possible.</p>
-                    <p><a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
-                </div>
-            </div>
+      </div>
 
-            <div class="card" style="width: 30%;">
-                <img class="card-img-top" src="/static/jane_smith.jpg" alt="Jane Smith">
-                <div class="card-body">
-                    <h5 class="card-title">Jane Smith</h5>
-                    <p class="card-text">Chief Financial Officer</p>
-                    <p class="card-text">Jane brings a wealth of financial expertise and ensures that all operations run smoothly and efficiently at Best Cars Dealership.</p>
-                    <p><a href="mailto:jane.smith@example.com">jane.smith@example.com</a></p>
-                </div>
-            </div>
-
-            <div class="card" style="width: 30%;">
-                <img class="card-img-top" src="/static/richard_roe.jpg" alt="Richard Roe">
-                <div class="card-body">
-                    <h5 class="card-title">Richard Roe</h5>
-                    <p class="card-text">Sales Manager</p>
-                    <p class="card-text">Richard leads our sales team with a focus on customer satisfaction and finding the right car for every customer.</p>
-                    <p><a href="mailto:richard.roe@example.com">richard.roe@example.com</a></p>
-                </div>
-            </div>
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="https://static.wikia.nocookie.net/goodgirls/images/b/b7/Dean.jpg/revision/latest?cb=20180707221730" alt="Card image">
+        <div class="card-body">
+          <p class="title">Salesman</p>
+          <p>Dean Bromso</p>
+          <p class="card-text">Striving to mantain a facade f success despite financial struggles. One of the best car salesman. </p>
+          <p>deanBromso@carscars.com</p>
         </div>
+      </div>
+
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="https://static.wikia.nocookie.net/goodgirls/images/f/f4/Annie.jpg/revision/latest?cb=20180707221705" alt="Card image">
+        <div class="card-body">
+          <p class="title">Saleswoman</p>
+          <p>Annie Marks</p>
+          <p class="card-text">Knowledgeable and personable professional who assists customers in selecting and purchasing vehicles, offering guidance on features, financing options and maintenance.</p>
+          <p>anniemarks@carscars.com</p>
+        </div>
+      </div>
     </div>
+    </div>
+    </div>
+    
 </div>
 
-<script src="/static/bootstrap.bundle.min.js"></script>
-</body>
 </html>
